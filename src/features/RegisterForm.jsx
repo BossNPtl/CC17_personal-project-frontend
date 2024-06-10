@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { FontSize, FontWeight } from "../constants/editSource"
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from 'axios';
+
+import validateRegister from "../validators/register-validate";
+import authApi from '../apis/auth-api';
 import Button from "../components/Button";
 import Input from "../components/Input";
 
@@ -10,15 +15,48 @@ const initailInput = {
     confirmPassword: ''
 };
 
+const initailInputError = {
+    email: '',
+    name: '',
+    password: '',
+    confirmPassword: ''
+};
+
 export default function RegisterForm() {
     const [input, setInput] = useState(initailInput);
-    
+    const [inputError, setInputError] = useState(initailInputError);
+
+    const navigate = useNavigate();
+
     const handleChangeInput = (event) => {
         setInput({ ...input, [event.target.name]: event.target.value })
+    };
+
+    const handleSubmitForm = async event => {
+        try {
+            event.preventDefault();
+            const failed = validateRegister(input);
+            if (failed) {
+                return setInputError(failed);
+            }
+            setInputError({ ...initailInputError });
+            console.log(input)
+            await authApi.register(input);
+            navigate('/auth/login');
+
+        } catch (err) {
+            console.log(err);
+            if (err instanceof AxiosError) {
+                if (err.response.data.field === 'email')
+                    setInputError(prev => ({ ...prev, email: 'email already in use.' }));
+            }
+        }
     }
-    
+
     return (
-        <form action="">
+        <form
+            onSubmit={handleSubmitForm}
+        >
             <div className="grid gap-5">
                 <h1 className={`${FontSize[24]} ${FontWeight[1]} mx-auto text-white`}>
                     Register
@@ -29,6 +67,7 @@ export default function RegisterForm() {
                         name='email'
                         value={input.email}
                         onChange={handleChangeInput}
+                        error={inputError.email}
                     />
                 </div>
                 <div>
@@ -37,6 +76,7 @@ export default function RegisterForm() {
                         name='name'
                         value={input.name}
                         onChange={handleChangeInput}
+                        error={inputError.name}
                     />
                 </div>
                 <div>
@@ -46,6 +86,7 @@ export default function RegisterForm() {
                         name='password'
                         value={input.password}
                         onChange={handleChangeInput}
+                        error={inputError.password}
                     />
                 </div>
                 <div>
@@ -62,6 +103,7 @@ export default function RegisterForm() {
                         name='confirmPassword'
                         value={input.confirmPassword}
                         onChange={handleChangeInput}
+                        error={inputError.confirmPassword}
                     />
                 </div>
                 <div>

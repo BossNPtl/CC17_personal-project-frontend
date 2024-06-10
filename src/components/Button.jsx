@@ -35,6 +35,7 @@ export default function Button({ children, bg = 'white', color = 'black', weight
         px-3 py-1.5 font- rounded-lg ${bgColor[bg]} ${textColor[color]} ${buttonWeight[weight]} ${fontStyle[fontType]} ${textSize[size]}
         `}
         onClick={onClick}
+        type='submit'
         >
             {children}
         </button>

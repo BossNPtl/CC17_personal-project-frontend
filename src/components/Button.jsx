@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 const bgColor = {
     white: 'bg-white hover:bg-[#E6E6E6]',
-    gray: 'bg-gray-500 hover:bg-gray-400'
+    gray: 'bg-gray-500 hover:bg-gray-400',
+    lightGray: 'bg-gray-200 hover:bg-gray-300'
 }
 
 const textColor = {
@@ -12,6 +13,7 @@ const textColor = {
 
 const buttonWeight = {
     full: 'w-full',
+    40: 'w-[90px]'
 }
 
 const fontStyle = {

@@ -21,4 +21,24 @@ body {
   background-image: url(/Asset/Source/bg/Main_bg.jpg);
   /* height: 200vh; */
   background-attachment: fixed;
+  /* background: no-repeat */
+}
+
+/* table, th, td {
+  border: 1px solid;
+} */
+
+tr {
+  background-color: #D0D0D0;
+}
+
+tr:nth-child(even) {background-color: #9B9B9B;}
+#td1 {
+  text-align: center;
+}
+#td4 {
+  text-align: center;
+}
+#th3 {
+  text-align: left;
 }

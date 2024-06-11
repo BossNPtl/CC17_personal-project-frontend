@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 import defaultProfilePic from '../../Asset/Source/profile_pic_01.jpg';
+import userSignIn from '../hooks/userSignIn';
 
 export default function Avatar({ src, size = 2.5 }) {
+    const { isUser } = userSignIn();
+    
     return (
         <>
             <img
@@ -11,7 +14,7 @@ export default function Avatar({ src, size = 2.5 }) {
                 className='rounded-full'
             />
             <p>
-                user
+                {isUser?.["name"]}
             </p>
         </>
     )

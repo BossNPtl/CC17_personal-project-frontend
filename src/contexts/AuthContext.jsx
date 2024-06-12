@@ -9,19 +9,19 @@ import authApi from "../apis/auth-api";
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
-    const [ isUser, setIsUser] = useState(null);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                if (getAccessToken()) {
-                    const res = await authApi.getAuthUser();
-                    setIsUser(res.data.user);
-                } 
-            }   catch (err) {
-                console.log(err)
+    const [isUser, setIsUser] = useState(null);
+    const fetchUser = async () => {
+        try {
+            if (getAccessToken()) {
+                const res = await authApi.getAuthUser();
+                setIsUser(res.data.user);
             }
-        };
+        } catch (err) {
+            console.log(err)
+        }
+    };
+    console.log(isUser)
+    useEffect(() => {
 
         fetchUser();
     }, []);
@@ -37,9 +37,9 @@ export default function AuthContextProvider({ children }) {
         removeAccessToken();
         setIsUser(null);
     };
-    
+
     return (
-        <AuthContext.Provider value={{ isUser, login, logout }}>
+        <AuthContext.Provider value={{ isUser, login, logout,fetchUser }}>
             {children}
         </AuthContext.Provider>
     );

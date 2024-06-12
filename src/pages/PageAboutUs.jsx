@@ -1,36 +1,26 @@
-import picBand2 from '../../Asset/Source/band-02.jpg'
-import logoBandAlpha from '../../Asset/Source/Logo-01-Alpha_B.png'
-import BandMember from '../layouts/BandMember'
 // import { FontSize, FontWeight } from '../constants/editSource'
+
+import picBand2re from '../../Asset/Source/resize/band-02.jpeg'
+import logoBandAlphaReBlack from '../../Asset/Source/resize/Logo-Alpha_B.png'
+import BandMember from '../layouts/BandMember'
 import InfoBand from '../layouts/infoBand'
 
 export default function PageAboutUs() {
   return (
     <div className='w-[100%] mx-auto'>
-      <div
-        className='h-[600px] bg-[center_top_-8.5rem] bg-no-repeat'
-        style={{ background: `url(${picBand2})` }}
-      >
-        {/* <img
-          className='max-w-lx relative bottom-[190px] z-[-10]'
-          src={picBand2} alt="picBand2" /> */}
-      </div>
-      {/* <div className='bg-red-400 w-[600px]'>
-      <div
-        className='h-[40rem] bg-[center_top_-8.5rem] bg-no-repeat bg-white'
-        style={{ backgroundImage: `url(${picBand2})` }}
-      >
-      </div>
-</div> */}
-
-      <div
-        className='h-[350px] overflow-hidden'
-      >
+      <div>
         <img
-          className='relative bottom-[200px] z-[-10]'
-          src={logoBandAlpha} alt="logoBandBlack" />
+          src={picBand2re}
+          alt="picBand2"
+        />
       </div>
-      <div className='w-[60%] flex mx-auto'>
+      <div
+        className='w-[60%] mx-auto pt-[50px] pb-[50px]'
+      >
+        <img src={logoBandAlphaReBlack}
+          alt="logoBandAlpha-B" />
+      </div>
+      <div className='w-[60%] flex mx-auto pb-[30px]'>
         <InfoBand />
       </div>
       <BandMember />

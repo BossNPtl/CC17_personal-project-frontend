@@ -1,0 +1,108 @@
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
+
+// import UserSignIn from "../hooks/userSignIn";
+import Avatar from "../components/Avatar";
+import Button from "../components/Button";
+import Input from '../components/Input';
+import validateRename from '../validators/user-validate';
+import userApi from '../apis/user-api';
+import UserSignIn from '../hooks/userSignIn';
+
+const initailInputError = {
+    name: ''
+};
+
+export default function ProfileDropdown({ logout, setOpen }) {
+
+    const {fetchUser} = UserSignIn()
+
+    const { isUser } = UserSignIn();
+    const [input, setInput] = useState({name:isUser.name})
+    const [edit, setEdit] = useState(false);
+    // const [newName, setNewName] = useState(isUser.name);
+    const [inputError, setInputError] = useState(initailInputError);
+
+    // console.log(input, 'input-------->>>')
+    const handleOnChange = (event) => {
+        setInput(prev => ({...prev, name: event.target.value}))
+    }
+
+    const handleRename = async (event) => {
+        try {
+            event.preventDefault();
+            const failed = validateRename(input)
+            // console.log(failed, 'is failed ---->>>');
+            if (failed) {
+                return setInputError((prev => ({...prev, name: failed})))
+            }
+            setInputError({ initailInputError });
+            if (input.name === isUser.name) {
+                return
+            }
+            // console.log(input.name, '&&&&&&&&&')
+            await userApi.rename(input)
+            fetchUser();
+            setOpen(prev => !prev);
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    return (
+        <div className='absolute top-14'>
+            <div className='bg-[#464646] p-3 w-[250px] border border-black rounded-xl flex flex-col gap-5'>
+                <div className='flex gap-5 items-center '>
+                    <div className='flex basis-16'>
+                        <Avatar size='3.6' />
+                    </div>
+                    <div className='flex grow'>
+                        {!edit
+                            ?
+                            <div>
+                                {input.name}
+                            </div>
+                            :
+                            <Input
+                                placeholder={'name'}
+                                name='name'
+                                value={input.name}
+                                onChange={handleOnChange}
+                                error={inputError.name}
+                            />
+                        }
+                    </div>
+                </div>
+                <div className='flex justify-between h-[20px]'>
+
+                    {!edit
+                        ? (
+                            <>
+                                <Button
+                                    weight='65'
+                                    onClick={() => setEdit(prev => !prev)}
+                                >Edit</Button>
+                                <Button
+                                    weight='65'
+                                    onClick={logout}
+                                >Logout</Button>
+                            </>
+                        ) : (
+                            <>
+                                <Button
+                                    weight='65'
+                                    onClick={() => setEdit(prev => !prev)}
+                                >Cancel</Button>
+                                <Button
+                                    weight='65'
+                                    onClick={handleRename}
+                                >Save</Button>
+                            </>
+                        )
+                    }
+                </div>
+            </div>
+        </div>
+    )
+}

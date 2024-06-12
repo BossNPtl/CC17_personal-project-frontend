@@ -24,10 +24,6 @@ body {
   /* background: no-repeat */
 }
 
-/* table, th, td {
-  border: 1px solid;
-} */
-
 tr {
   background-color: #D0D0D0;
 }
@@ -41,4 +37,8 @@ tr:nth-child(even) {background-color: #9B9B9B;}
 }
 #th3 {
   text-align: left;
+}
+
+.boxShadowRight {
+  box-shadow: 14px 14px 3px #0b0b0b;
 }

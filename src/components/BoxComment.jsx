@@ -12,8 +12,8 @@ export default function BoxComment() {
                 <p>test เทสสสสสสสสสสสสสสสสสสสส test</p>
                 <hr className='border-black' />
                 <div className='flex gap-4 justify-end'>
-                    <Button bg='gray' color='white' weight='40'>Cancel</Button>
-                    <Button bg='gray' color='white' weight='40'>Submit</Button>
+                    <Button bg='gray' color='white' weight='90'>Cancel</Button>
+                    <Button bg='gray' color='white' weight='90'>Submit</Button>
                 </div>
             </div>
         </div>

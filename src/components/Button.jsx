@@ -13,7 +13,8 @@ const textColor = {
 
 const buttonWeight = {
     full: 'w-full',
-    40: 'w-[90px]'
+    90: 'w-[90px]',
+    65: 'w-[65px]'
 }
 
 const fontStyle = {
@@ -33,6 +34,7 @@ export default function Button({ children, bg = 'white', color = 'black', weight
         <button
         className={`
         px-3 py-1.5 font- rounded-lg ${bgColor[bg]} ${textColor[color]} ${buttonWeight[weight]} ${fontStyle[fontType]} ${textSize[size]}
+        flex items-center justify-center
         `}
         onClick={onClick}
         type='submit'

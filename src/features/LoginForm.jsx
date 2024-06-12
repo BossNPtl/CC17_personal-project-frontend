@@ -38,7 +38,7 @@ export default function LoginForm() {
                 return setInputError(failed);
             }
             setInputError({ ...initailInputError });
-            console.log(input);
+            // console.log(input);
 
             await login(input);
             navigate('/')

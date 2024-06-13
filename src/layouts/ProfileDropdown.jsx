@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 
-// import UserSignIn from "../hooks/userSignIn";
 import Avatar from "../components/Avatar";
 import Button from "../components/Button";
 import Input from '../components/Input';
@@ -15,9 +14,7 @@ const initailInputError = {
 
 export default function ProfileDropdown({ logout, setOpen }) {
 
-    const {fetchUser} = UserSignIn()
-
-    const { isUser } = UserSignIn();
+    const { fetchUser, isUser } = UserSignIn();
     const [input, setInput] = useState({name:isUser.name})
     const [edit, setEdit] = useState(false);
     // const [newName, setNewName] = useState(isUser.name);
@@ -26,6 +23,12 @@ export default function ProfileDropdown({ logout, setOpen }) {
     // console.log(input, 'input-------->>>')
     const handleOnChange = (event) => {
         setInput(prev => ({...prev, name: event.target.value}))
+    }
+
+    const handleCancelEditName = () => {
+        setEdit(false)
+        setInput({name:isUser.name})
+        
     }
 
     const handleRename = async (event) => {
@@ -38,7 +41,11 @@ export default function ProfileDropdown({ logout, setOpen }) {
             }
             setInputError({ initailInputError });
             if (input.name === isUser.name) {
-                return
+                return setOpen(prev => !prev);
+            } 
+            if (!edit) {
+                console.log('first')
+                return setInput({name:isUser.name})
             }
             // console.log(input.name, '&&&&&&&&&')
             await userApi.rename(input)
@@ -92,7 +99,8 @@ export default function ProfileDropdown({ logout, setOpen }) {
                             <>
                                 <Button
                                     weight='65'
-                                    onClick={() => setEdit(prev => !prev)}
+                                    // onClick={() => setEdit(prev => !prev)}
+                                    onClick={handleCancelEditName}
                                 >Cancel</Button>
                                 <Button
                                     weight='65'

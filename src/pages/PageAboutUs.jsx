@@ -1,9 +1,8 @@
-// import { FontSize, FontWeight } from '../constants/editSource'
-
 import picBand2re from '../../Asset/Source/resize/band-02.jpeg'
-import logoBandAlphaReBlack from '../../Asset/Source/resize/Logo-Alpha_B.png'
-import BandMember from '../layouts/BandMember'
+import logoBand from '../../photos/logo/Logo-Alpha-B.png'
+
 import InfoBand from '../layouts/infoBand'
+import BandMember from '../layouts/BandMember'
 
 export default function PageAboutUs() {
   return (
@@ -17,7 +16,7 @@ export default function PageAboutUs() {
       <div
         className='w-[60%] mx-auto pt-[50px] pb-[50px]'
       >
-        <img src={logoBandAlphaReBlack}
+        <img src={logoBand}
           alt="logoBandAlpha-B" />
       </div>
       <div className='w-[60%] flex mx-auto pb-[30px]'>

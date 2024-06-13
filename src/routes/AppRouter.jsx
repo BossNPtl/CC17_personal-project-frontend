@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             { path: '/aboutUs', element: <PageAboutUs /> },
             { path: '/auth/login', element: <PageLogin /> },
             { path: '/auth/register', element: <PageRegister /> },
-            { path: '/album/1', element: <Album1 /> },
+            { path: '/album/:albumId', element: <Album1 /> },
             { path: '/admin/edit', element: <PageAdminEdit /> }
         ]
     }

@@ -14,7 +14,8 @@ const textColor = {
 const buttonWeight = {
     full: 'w-full',
     90: 'w-[90px]',
-    65: 'w-[65px]'
+    65: 'w-[65px]',
+    150: 'w-[150px]'
 }
 
 const fontStyle = {

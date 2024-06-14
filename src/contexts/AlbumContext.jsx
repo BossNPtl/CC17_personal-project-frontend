@@ -6,27 +6,20 @@ export const AlbumContext = createContext();
 
 export default function AlbumContextProvider({ children }) {
     const [isAlbum, setIsAlbum] = useState(null);
-
-    // useEffect(() => {
-    //     const fetchAllAlbum = async () => {
-    //         try {
-    //             const res = await albumApi.getAllAlbum();
-    //             setIsAlbum(res.data)
-    //         } catch (err) {
-    //             console.log(err)
-    //         }
-    //         console.log(isAlbum);
-    //     }
-    //     fetchAllAlbum();
-    // }, []);
+    const [isSong, setIsSong] = useState(null);
 
     const createAlbum = async input => {
         const res = await albumApi.createAlbum(input);
         setIsAlbum(res.data);
     }
     
+    const createSong = async (input) => {
+        const res = await albumApi.createSong(input);
+        setIsSong(res.data);
+    }
+    
     return (
-        <AlbumContext.Provider value={{ isAlbum, setIsAlbum, createAlbum }}>
+        <AlbumContext.Provider value={{ isAlbum, setIsAlbum, createAlbum, isSong, createSong }}>
             {children}
         </AlbumContext.Provider>
     );

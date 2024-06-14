@@ -20,7 +20,7 @@ export default function AuthContextProvider({ children }) {
             console.log(err)
         }
     };
-    console.log(isUser)
+    // console.log(isUser)
     useEffect(() => {
 
         fetchUser();

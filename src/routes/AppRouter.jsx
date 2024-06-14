@@ -7,7 +7,7 @@ import PageLogin from '../pages/PageLogin'
 import PageRegister from '../pages/PageRegister'
 import PageAdminEdit from '../pages/PageAdminEdit'
 
-import Album1 from '../pages-sub/Album-1'
+import Album from '../pages-sub/Album'
 
 const router = createBrowserRouter([
     {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             { path: '/aboutUs', element: <PageAboutUs /> },
             { path: '/auth/login', element: <PageLogin /> },
             { path: '/auth/register', element: <PageRegister /> },
-            { path: '/album/:albumId', element: <Album1 /> },
+            { path: '/album/:albumId', element: <Album /> },
             { path: '/admin/edit', element: <PageAdminEdit /> }
         ]
     }

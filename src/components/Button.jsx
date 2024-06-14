@@ -1,3 +1,4 @@
+
 /* eslint-disable react/prop-types */
 const bgColor = {
     white: 'bg-white hover:bg-[#E6E6E6]',
@@ -30,7 +31,7 @@ const textSize = {
     24: 'text-2xl'
 }
 
-export default function Button({ children, bg = 'white', color = 'black', weight = 'full', fontType = 0, size = 16, onClick }) {
+export default function Button({ children, bg = 'white', color = 'black', weight = 'full', fontType = 0, size = 16, onClick, type = 'submit' }) {
     return (
         <button
         className={`
@@ -38,7 +39,7 @@ export default function Button({ children, bg = 'white', color = 'black', weight
         flex items-center justify-center
         `}
         onClick={onClick}
-        type='submit'
+        type={type}
         >
             {children}
         </button>

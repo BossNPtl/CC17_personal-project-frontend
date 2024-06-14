@@ -38,6 +38,9 @@ tr:nth-child(even) {background-color: #9B9B9B;}
 #th3 {
   text-align: left;
 }
+#tdButton {
+  background: none;
+}
 
 .boxShadowRight {
   box-shadow: 14px 14px 3px #0b0b0b;

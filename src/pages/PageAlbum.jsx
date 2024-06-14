@@ -1,35 +1,23 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+// import { useEffect } from 'react';
 
-// import album1 from '../../Asset/Source/Album-2013-Jinsei_x_Boku_=_cover.jpg'
 import ModalCreateAlbum from '../layouts/Modal-CreateAlbum'
 import Modal from '../components/modal';
 import HasAlbum from '../hooks/hasAlbum';
-import albumApi from '../apis/album-api';
-import { useEffect } from 'react';
+import UserSignIn from '../hooks/userSignIn';
+// import albumApi from '../apis/album-api';
 
 export default function PageAlbum() {
-  const { isAlbum, setIsAlbum } = HasAlbum();
+  const { isAlbum } = HasAlbum();
+  const { isUser } = UserSignIn();
 
-  useEffect(() => {
-    const fetchAllAlbum = async () => {
-      try {
-        const res = await albumApi.getAllAlbum();
-        setIsAlbum(res.data)
-        // console.log('res -->', res)
-        // console.log('res.data -->', res.data)
-      } catch (err) {
-        console.log(err)
-      }
-      console.log(isAlbum);
-    }
-    fetchAllAlbum();
-  }, []);
+  // const [reset, setReset] = useState(false);
+  // const Rerender = () => setReset(!reset);
+
   console.log(isAlbum);
 
   const [open, setOpen] = useState(false);
-
-
 
   return (
     <div className='w-[100%] pb-20'>
@@ -45,13 +33,14 @@ export default function PageAlbum() {
           </Link>
         )}
 
-        <div
-          role='button' onClick={() => setOpen(true)}
-          className='h-[250px] w-[250px] mx-auto bg-gray-200 flex justify-center items-center'>
-          <div className='h-[100px] w-[100px] mx-auto bg-gray-300 border border-black'>
-
+        {isUser?.['isAdmin'] ?
+          < div
+            role='button' onClick={() => setOpen(true)}
+            className='h-[250px] w-[250px] mx-auto bg-gray-200 flex justify-center items-center'>
+            <div className='h-[100px] w-[100px] mx-auto bg-gray-300 border border-black'>
+            </div>
           </div>
-        </div>
+          : null}
         <Modal
           title='Create Album'
           width={60}
@@ -61,6 +50,6 @@ export default function PageAlbum() {
         </Modal>
 
       </div>
-    </div>
+    </div >
   )
 }

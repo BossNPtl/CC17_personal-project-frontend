@@ -1,13 +1,14 @@
+import { lazy } from 'react'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
-import Navbar from '../layouts/Navbar'
-import PageHome from '../pages/PageHome'
-import PageAlbum from '../pages/PageAlbum'
-import PageAboutUs from '../pages/PageAboutUs'
-import PageLogin from '../pages/PageLogin'
-import PageRegister from '../pages/PageRegister'
-import PageAdminEdit from '../pages/PageAdminEdit'
 
-import Album from '../pages-sub/Album'
+const Navbar = lazy(() => import ('../layouts/Navbar'));
+const PageHome = lazy(() => import ('../pages/PageHome'));
+const PageAlbum = lazy(() => import ('../pages/PageAlbum'));
+const PageAboutUs = lazy(() => import ('../pages/PageAboutUs'));
+const PageLogin = lazy(() => import ('../pages/PageLogin'));
+const PageRegister = lazy(() => import ('../pages/PageRegister'));
+const PageAdminEdit = lazy(() => import ('../pages/PageAdminEdit'));
+const Album = lazy(() => import ('../pages-sub/Album'));
 
 const router = createBrowserRouter([
     {

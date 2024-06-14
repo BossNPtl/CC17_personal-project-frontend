@@ -2,7 +2,8 @@
 
 const BgColor = {
     gray: 'bg-gray-400',
-    white: 'bg-white'
+    white: 'bg-white',
+    none: 'bg-none'
 };
 
 const TextColor = {

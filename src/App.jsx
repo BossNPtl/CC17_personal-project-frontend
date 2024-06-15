@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import AppRouter from "./routes/AppRouter";
 import AuthContextProvider from "./contexts/AuthContext";
 import AlbumContextProvider from "./contexts/AlbumContext";
+import CommentContextProvider from "./contexts/CommentContext";
 
 function App() {
 
@@ -10,7 +11,9 @@ function App() {
       <Suspense fallback={"loading"} >
         <AuthContextProvider>
           <AlbumContextProvider>
-            <AppRouter />
+            <CommentContextProvider>
+              <AppRouter />
+            </CommentContextProvider>
           </AlbumContextProvider>
         </AuthContextProvider>
       </Suspense>

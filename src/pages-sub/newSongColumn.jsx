@@ -6,42 +6,30 @@ export default function NewSongColumn({ onChange, input }) {
 
     return (
         <>
-            {/* <form onSubmit={onSubmit}> */}
-                {/* <tr> */}
-                    {/* <td> */}
-                        <Input
-                            placeholder={'No'}
-                            name='no'
-                            value={input.no}
-                            onChange={onChange}
-                        />
-                    {/* </td> */}
-                    {/* <td> */}
-                        <Input
-                            placeholder={'Title'}
-                            name='title'
-                            value={input.title}
-                            onChange={onChange}
-                        />
-                    {/* </td> */}
-                    {/* <td> */}
-                        <Input
-                            placeholder={'Writer'}
-                            name='writer'
-                            value={input.writer}
-                            onChange={onChange}
-                        />
-                    {/* </td> */}
-                    {/* <td> */}
-                        <Input
-                            placeholder={'Length'}
-                            name='length'
-                            value={input.length}
-                            onChange={onChange}
-                        />
-                    {/* </td> */}
-                {/* </tr> */}
-            {/* </form> */}
+            <Input
+                placeholder={'No'}
+                name='no'
+                value={input.no}
+                onChange={onChange}
+            />
+            <Input
+                placeholder={'Title'}
+                name='title'
+                value={input.title}
+                onChange={onChange}
+            />
+            <Input
+                placeholder={'Writer'}
+                name='writer'
+                value={input.writer}
+                onChange={onChange}
+            />
+            <Input
+                placeholder={'Length'}
+                name='length'
+                value={input.length}
+                onChange={onChange}
+            />
         </>
     )
 }

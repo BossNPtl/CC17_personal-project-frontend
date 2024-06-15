@@ -8,18 +8,19 @@ export const CommentContext = createContext();
 export default function CommentContextProvider({ children }) {
     const [isComment, setIsComment] = useState([]);
     
-    const createComment = async (input) => {
+    const createComment = async (album_id, input) => {
         try {
-            const res = await commentApi.createComment(input);
-            setIsComment(res.data);
+            const res = await commentApi.createComment(album_id, input);
+            // setIsComment(res.data);
         }   catch (err) {
             console.log(err)
         }
     }
 
-    const fetchComment = async (albumId) => {
+    const fetchComment = async (albumId, input) => {
         try {
-            const res = await commentApi.getAllComment(albumId);
+            const res = await commentApi.getAllComment(albumId, input);
+            console.log(res.data)
             setIsComment(res.data);
         }   catch (err) {
             console.log(err);

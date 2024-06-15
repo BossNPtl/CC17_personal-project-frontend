@@ -93,7 +93,7 @@ export default function ListSong() {
             </table>
             <form onSubmit={handleSubmitSong} >
                 {add &&
-                    <NewSongColumn onChange={handleChangeInput} input={input} onSubmit={handleSubmitSong} />
+                    <NewSongColumn onChange={handleChangeInput} input={input} />
                 }
                 {isUser?.['isAdmin'] ?
                     <div className="pt-3 flex justify-center gap-6">

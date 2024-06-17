@@ -6,19 +6,25 @@ import ModalCreateAlbum from '../layouts/Modal-CreateAlbum'
 import Modal from '../components/modal';
 import HasAlbum from '../hooks/hasAlbum';
 import UserSignIn from '../hooks/userSignIn';
+import { useEffect } from 'react';
 // import albumApi from '../apis/album-api';
 
 export default function PageAlbum() {
   const { isAlbum } = HasAlbum();
   const { isUser } = UserSignIn();
 
-  // const [reset, setReset] = useState(false);
-  // const Rerender = () => setReset(!reset);
-
+  const [open, setOpen] = useState(false);
   console.log(isAlbum);
 
-  const [open, setOpen] = useState(false);
+  const [reset, setReset] = useState(false);
+  const Rerender = () => setReset(!reset);
 
+  useEffect(() => {
+    
+  }, [reset]);
+
+  console.log(isAlbum)
+  
   return (
     <div className='w-[100%] pb-20'>
       <div className='w-[60%] mx-auto mt-20 grid grid-cols-2 gap-20 '>
@@ -46,7 +52,7 @@ export default function PageAlbum() {
           width={60}
           open={open} onClose={() => setOpen(false)}
         >
-          <ModalCreateAlbum onSuccess={() => setOpen(false)} />
+          <ModalCreateAlbum onSuccess={() => Rerender()} />
         </Modal>
 
       </div>

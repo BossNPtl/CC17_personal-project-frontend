@@ -16,7 +16,7 @@ export default function PostForm({ onChange, inputPost, onSubmit }) {
                 <form onSubmit={onSubmit} >
                     <input
                         className='bg-[#d1d5db] text-black placeholder:text-gray-400 px-2 py-1 w-full 
-                        active:outline-none active:border-none'
+                        focus:outline-none focus:border-none'
                         placeholder={'What do you think ?'}
                         name='message'
                         value={inputPost.message}

@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
+import ProtectedRouteAdmin from '../components/routes/protuctRouteAdmin';
 
 const Navbar = lazy(() => import ('../layouts/Navbar'));
 const PageHome = lazy(() => import ('../pages/PageHome'));
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
             { path: '/auth/login', element: <PageLogin /> },
             { path: '/auth/register', element: <PageRegister /> },
             { path: '/album/:albumId', element: <Album /> },
-            { path: '/admin/edit', element: <PageAdminEdit /> }
+            { path: '/admin/edit', element: <ProtectedRouteAdmin><PageAdminEdit /></ProtectedRouteAdmin> }
         ]
     }
 ])

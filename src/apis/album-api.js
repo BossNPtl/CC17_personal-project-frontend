@@ -8,4 +8,6 @@ albumApi.getAllAlbum = () => axios.get('http://localhost:9690/album/allAlbum');
 albumApi.getAlbum = (albumId) => axios.get(`http://localhost:9690/album/${albumId}`);
 albumApi.getAllSong = (albumId) => axios.get(`http://localhost:9690/album/${albumId}/allSong`);
 
+// albumApi.createPicAlbum = formData => axios.create('http://localhost:9690/album/addPicAlbum', formData);
+
 export default albumApi;

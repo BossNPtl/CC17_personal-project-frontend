@@ -8,19 +8,19 @@ import Input from "../components/Input"
 import Button from "../components/Button"
 import UserSignIn from "../hooks/userSignIn";
 
-const initailInput = {
+const initialInput = {
     email: '',
     password: ''
 };
 
-const initailInputError = {
+const initialInputError = {
     email: '',
     password: ''
 };
 
 export default function LoginForm() {
-    const [input, setInput] = useState(initailInput);
-    const [inputError, setInputError] = useState(initailInputError);
+    const [input, setInput] = useState(initialInput);
+    const [inputError, setInputError] = useState(initialInputError);
 
     const navigate = useNavigate();
 
@@ -37,8 +37,7 @@ export default function LoginForm() {
             if (failed) {
                 return setInputError(failed);
             }
-            setInputError({ ...initailInputError });
-            // console.log(input);
+            setInputError({ ...initialInputError });
 
             await login(input);
             navigate('/')

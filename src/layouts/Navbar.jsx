@@ -11,7 +11,6 @@ import ProfileDropdown from './ProfileDropdown';
 
 export default function Navbar() {
     const { isUser, logout } = UserSignIn();
-    // console.log(isUser, 'isUser ----->>>')
     const [open, setOpen] = useState(false);
 
     const navigate = useNavigate();

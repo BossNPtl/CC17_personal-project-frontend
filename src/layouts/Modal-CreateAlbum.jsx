@@ -7,7 +7,7 @@ import Input from "../components/Input";
 import validateCreateAlbum from "../validators/createAlbum-validate";
 import HasAlbum from "../hooks/hasAlbum";
 
-const initailInput = {
+const initialInput = {
     name: '',
     picture_album: '',
     picture_band: '',
@@ -15,12 +15,10 @@ const initailInput = {
     release: ''
 };
 
-const initailInputError = {
+const initialInputError = {
     name: '',
     picture_album: '',
     description: ''
-    // picture_band: '',
-    // release: ''
 };
 
 export default function ModalCreateAlbum() {
@@ -29,11 +27,11 @@ export default function ModalCreateAlbum() {
     const dateTime = new Date(date)
     console.log(dateTime);
     */
-   const { createAlbum } = HasAlbum()
-   
-    const [input, setInput] = useState(initailInput);
-    const [inputError, setInputError] = useState(initailInputError);
-    // console.log(input)
+    const { createAlbum } = HasAlbum()
+
+    const [input, setInput] = useState(initialInput);
+    const [inputError, setInputError] = useState(initialInputError);
+
     const handleChangeInput = (event) => {
         setInput({ ...input, [event.target.name]: event.target.value })
     };
@@ -45,24 +43,16 @@ export default function ModalCreateAlbum() {
             if (failed) {
                 return setInputError(failed);
             }
-            setInputError({ ...initailInputError });
-            // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%')
+            setInputError({ ...initialInputError });
             await createAlbum(input);
-            
+
         } catch (err) {
             console.log(err)
-            // if (err instanceof AxiosError) {
-            //     const message = err.response.status === 400
-            //         ? 'Fill all input.'
-            //         : 'Internal server error'
-            //     console.log(message);
-            // }
         }
     }
 
     return (
         <>
-            {/* <div className="w-[70%] bg-[#464646] border border-black flex flex-col p-3"> */}
             <form onSubmit={handleSubmitForm} >
                 <div className="flex flex-1 gap-4">
                     <div className="w-[50%] pb-6 text-white flex flex-col gap-1">
@@ -88,7 +78,7 @@ export default function ModalCreateAlbum() {
                             name="picture_band"
                             onChange={handleChangeInput}
                             value={input.picture_band}
-                            // error={inputError.picture_band}
+                        // error={inputError.picture_band}
                         />
                     </div>
                     <div className="w-[50%] text-white flex flex-col gap-1 ">
@@ -103,13 +93,13 @@ export default function ModalCreateAlbum() {
                         >
 
                         </textarea>
-                        <p className="pt-4">Release :</p>
+                        <p className="pt-1">Release :</p>
                         <Input
                             placeholder={'DD/MM/YYYY'}
                             name="release"
                             onChange={handleChangeInput}
                             value={input.release}
-                            // error={inputError.release}
+                        // error={inputError.release}
                         />
                     </div>
                 </div>
@@ -121,7 +111,6 @@ export default function ModalCreateAlbum() {
                     </Button>
                 </div>
             </form>
-            {/* </div> */}
         </>
     )
 }

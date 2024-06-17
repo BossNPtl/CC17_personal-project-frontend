@@ -8,14 +8,14 @@ import authApi from '../apis/auth-api';
 import Button from "../components/Button";
 import Input from "../components/Input";
 
-const initailInput = {
+const initialInput = {
     email: '',
     name: '',
     password: '',
     confirmPassword: ''
 };
 
-const initailInputError = {
+const initialInputError = {
     email: '',
     name: '',
     password: '',
@@ -23,8 +23,8 @@ const initailInputError = {
 };
 
 export default function RegisterForm() {
-    const [input, setInput] = useState(initailInput);
-    const [inputError, setInputError] = useState(initailInputError);
+    const [input, setInput] = useState(initialInput);
+    const [inputError, setInputError] = useState(initialInputError);
 
     const navigate = useNavigate();
 
@@ -39,8 +39,7 @@ export default function RegisterForm() {
             if (failed) {
                 return setInputError(failed);
             }
-            setInputError({ ...initailInputError });
-            console.log(input)
+            setInputError({ ...initialInputError });
             await authApi.register(input);
             navigate('/auth/login');
 
@@ -92,6 +91,7 @@ export default function RegisterForm() {
                 <div>
                     <ol className="text-gray-400 text-sm type">
                         <li>
+                            <p>ใช้ได้แค่ตัวอักษรภาษาอังกฤษและตัวเลข</p>
                             <p>มีความยาวอย่างน้อย 8 ตัวอักษร</p>
                         </li>
                     </ol>

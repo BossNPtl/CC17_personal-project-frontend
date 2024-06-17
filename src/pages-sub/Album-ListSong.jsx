@@ -77,7 +77,7 @@ export default function ListSong() {
                 <tbody>
                     {isSong?.map((item) =>
                         <tr key={item.id}>
-                            <td id="td1">{item.no}</td>
+                            <td id="td1">{item.no}.</td>
                             <td id="td2">{item.title}</td>
                             <td id="td3">{item.writer}</td>
                             <td id="td4">{item.length}</td>

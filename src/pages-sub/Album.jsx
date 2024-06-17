@@ -64,7 +64,7 @@ export default function Album() {
         }
     }
 
-    const handleEditPost = async ( id,message) => {
+    const handleEditPost = async (id, message) => {
         try {
             console.log(id, message)
             await editComment(id, message)
@@ -118,16 +118,16 @@ export default function Album() {
                 </div>}
             <div className='w-[80%] mb-10'>
                 <div className='flex gap-2'>
-                <p className='mb-6'>ความคิดเห็น</p>
-                {`${isComment.length}`}
-                <p className='mb-6'>รายการ</p>
+                    <p className='mb-6'>ความคิดเห็น</p>
+                    {`${isComment.length}`}
+                    <p className='mb-6'>รายการ</p>
                 </div>
                 <div className='flex flex-col gap-6'>
                     <PostForm onChange={handleChangeInput} inputPost={inputPost} onSubmit={handlePostComment} />
                     {isComment?.map((item) =>
                         <BoxComment
-                            key={item.id} item={item} 
-                            onDelete={()=>handleDeletePost(item.id)} onSave={handleEditPost}
+                            key={item.id} item={item}
+                            onDelete={() => handleDeletePost(item.id)} onSave={handleEditPost}
                         />
                     )}
                 </div>

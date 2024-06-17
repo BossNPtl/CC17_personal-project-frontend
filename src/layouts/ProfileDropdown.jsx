@@ -17,10 +17,8 @@ export default function ProfileDropdown({ logout, setOpen }) {
     const { fetchUser, isUser } = UserSignIn();
     const [input, setInput] = useState({name:isUser.name})
     const [edit, setEdit] = useState(false);
-    // const [newName, setNewName] = useState(isUser.name);
     const [inputError, setInputError] = useState(initialInputError);
 
-    // console.log(input, 'input-------->>>')
     const handleOnChange = (event) => {
         setInput(prev => ({...prev, name: event.target.value}))
     }
@@ -35,7 +33,6 @@ export default function ProfileDropdown({ logout, setOpen }) {
         try {
             event.preventDefault();
             const failed = validateRename(input)
-            // console.log(failed, 'is failed ---->>>');
             if (failed) {
                 return setInputError((prev => ({...prev, name: failed})))
             }
@@ -47,7 +44,6 @@ export default function ProfileDropdown({ logout, setOpen }) {
                 console.log('first')
                 return setInput({name:isUser.name})
             }
-            // console.log(input.name, '&&&&&&&&&')
             await userApi.rename(input)
             fetchUser();
             setOpen(prev => !prev);
@@ -99,7 +95,6 @@ export default function ProfileDropdown({ logout, setOpen }) {
                             <>
                                 <Button
                                     weight='65'
-                                    // onClick={() => setEdit(prev => !prev)}
                                     onClick={handleCancelEditName}
                                 >Cancel</Button>
                                 <Button

@@ -23,7 +23,7 @@ export default function AlbumContextProvider({ children }) {
 
     const createAlbum = async input => {
         const res = await albumApi.createAlbum(input);
-        setIsAlbum(res.data);
+        setIsAlbum(prev=>[...prev,{id:res.data.album.id,picture_album:res.data.album.picture_album}]);
     }
     
     const createSong = async (input) => {
@@ -35,12 +35,9 @@ export default function AlbumContextProvider({ children }) {
         try {
             const res = await albumApi.getAllSong(albumId);
             setIsSong(res.data)
-            // console.log('res -->', res)
-            // console.log('res.data -->', res.data)
         } catch (err) {
             console.log(err)
         }
-        // console.log(isSong);
     }
 
     return (

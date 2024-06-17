@@ -8,7 +8,7 @@ import validateRename from '../validators/user-validate';
 import userApi from '../apis/user-api';
 import UserSignIn from '../hooks/userSignIn';
 
-const initailInputError = {
+const initialInputError = {
     name: ''
 };
 
@@ -18,7 +18,7 @@ export default function ProfileDropdown({ logout, setOpen }) {
     const [input, setInput] = useState({name:isUser.name})
     const [edit, setEdit] = useState(false);
     // const [newName, setNewName] = useState(isUser.name);
-    const [inputError, setInputError] = useState(initailInputError);
+    const [inputError, setInputError] = useState(initialInputError);
 
     // console.log(input, 'input-------->>>')
     const handleOnChange = (event) => {
@@ -39,7 +39,7 @@ export default function ProfileDropdown({ logout, setOpen }) {
             if (failed) {
                 return setInputError((prev => ({...prev, name: failed})))
             }
-            setInputError({ initailInputError });
+            setInputError({ initialInputError });
             if (input.name === isUser.name) {
                 return setOpen(prev => !prev);
             } 

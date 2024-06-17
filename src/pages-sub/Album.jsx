@@ -17,7 +17,7 @@ const initialInputPost = {
 export default function Album() {
     const [album, setAlbum] = useState();
     const { albumId } = useParams();
-    const { isComment, fetchComment, createComment } = HasComment();
+    const { isComment, fetchComment, createComment, editComment, deleteComment } = HasComment();
     const [inputPost, setInputPost] = useState(initialInputPost);
     const [reset, setReset] = useState(false);
 
@@ -45,7 +45,7 @@ export default function Album() {
     const handleChangeInput = async (event) => {
         setInputPost({ ...inputPost, [event.target.name]: event.target.value })
     }
-    
+
     const handlePostComment = async (event) => {
         try {
             event.preventDefault();
@@ -58,28 +58,32 @@ export default function Album() {
             await createComment(album_id, inputPost);
             setInputPost(initialInputPost);
             Rerender();
-            
-        }   catch (err) {
+
+        } catch (err) {
             console.log(err)
         }
     }
-    
-    const handleEditPost = async (event) => {
+
+    const handleEditPost = async ( id,message) => {
         try {
-            event.preventDefault();
-        }   catch (err) {
+            console.log(id, message)
+            await editComment(id, message)
+            Rerender();
+
+        } catch (err) {
             console.log(err)
         }
     }
-    
-    const handleDeletePost = async (event) => {
+
+    const handleDeletePost = async (id) => {
         try {
-            event.preventDefault()
-        }   catch (err) {
+            await deleteComment(id);
+            Rerender();
+        } catch (err) {
             console.log(err)
         }
     }
-    
+
     return (
         <div className='w-[75%] mx-auto flex flex-col justify-center items-center mt-20 '>
             <div className='mb-10 h-[300px] bg-red-200'>
@@ -113,12 +117,19 @@ export default function Album() {
                         src={album?.picture_band} alt={album.picture_band} />
                 </div>}
             <div className='w-[80%] mb-10'>
-                <p className='mb-6'>ความคิดเห็น 0 รายการ</p>
+                <div className='flex gap-2'>
+                <p className='mb-6'>ความคิดเห็น</p>
+                {`${isComment.length}`}
+                <p className='mb-6'>รายการ</p>
+                </div>
                 <div className='flex flex-col gap-6'>
                     <PostForm onChange={handleChangeInput} inputPost={inputPost} onSubmit={handlePostComment} />
-                    {isComment?.map((item) => 
-                        <BoxComment key={item.id} item={item} onDelete={handleDeletePost} onEdit={handleEditPost} />
-                        )}
+                    {isComment?.map((item) =>
+                        <BoxComment
+                            key={item.id} item={item} 
+                            onDelete={()=>handleDeletePost(item.id)} onSave={handleEditPost}
+                        />
+                    )}
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ export default function CommentContextProvider({ children }) {
     const createComment = async (album_id, input) => {
         try {
             const res = await commentApi.createComment(album_id, input);
+            // console.log(res);
             // setIsComment(res.data);
         }   catch (err) {
             console.log(err)
@@ -20,17 +21,18 @@ export default function CommentContextProvider({ children }) {
     const fetchComment = async (albumId, input) => {
         try {
             const res = await commentApi.getAllComment(albumId, input);
-            console.log(res.data)
+            // console.log(res.data)
             setIsComment(res.data);
         }   catch (err) {
             console.log(err);
         }
     }
 
-    const editComment = async (id) => {
+    const editComment = async (id,message) => {
         try {
-            const res = await commentApi.editComment(id);
-            setIsComment(res.data);
+            console.log(id, message , 'fdsfsadfsdfdsfsdafsd')
+            const res = await commentApi.editComment(id,message);
+            // setIsComment(res.data);
         }   catch (err) {
             console.log(err)
         }
@@ -39,7 +41,7 @@ export default function CommentContextProvider({ children }) {
     const deleteComment = async (id) => {
         try {
             const res = await commentApi.deleteComment(id);
-            setIsComment(res.data);
+            // setIsComment(res.data);
         }   catch (err) {
             console.log(err)
         }

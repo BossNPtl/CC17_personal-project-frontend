@@ -22,7 +22,7 @@ export default function Navbar() {
     }
 
     return (
-        <header className="flex justify-between items-center bg-black px-32 py-5 fixed w-screen">
+        <header className="flex justify-between items-center bg-black px-32 py-5 fixed w-screen z-50">
             <MenuBar />
             <div className='flex gap-7 items-center text-white relative'>
                 {!isUser

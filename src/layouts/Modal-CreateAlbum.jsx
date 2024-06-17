@@ -21,7 +21,7 @@ const initialInputError = {
     description: ''
 };
 
-export default function ModalCreateAlbum() {
+export default function ModalCreateAlbum({ onSuccess }) {
     /*
     const date = "12/06/2024"
     const dateTime = new Date(date)
@@ -45,6 +45,7 @@ export default function ModalCreateAlbum() {
             }
             setInputError({ ...initialInputError });
             await createAlbum(input);
+            onSuccess();
 
         } catch (err) {
             console.log(err)

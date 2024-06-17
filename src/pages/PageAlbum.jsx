@@ -1,42 +1,47 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-// import { useEffect } from 'react';
 
 import ModalCreateAlbum from '../layouts/Modal-CreateAlbum'
 import Modal from '../components/modal';
 import HasAlbum from '../hooks/hasAlbum';
 import UserSignIn from '../hooks/userSignIn';
-import { useEffect } from 'react';
-// import albumApi from '../apis/album-api';
 
 export default function PageAlbum() {
-  const { isAlbum } = HasAlbum();
+  const { isAlbum, deleteAlbum } = HasAlbum();
   const { isUser } = UserSignIn();
 
   const [open, setOpen] = useState(false);
-  console.log(isAlbum);
 
-  const [reset, setReset] = useState(false);
-  const Rerender = () => setReset(!reset);
+  const handleDeleteAlbum = async (albumId) => {
+    try {
+      await deleteAlbum(albumId)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
-  useEffect(() => {
-    
-  }, [reset]);
-
-  console.log(isAlbum)
-  
   return (
     <div className='w-[100%] pb-20'>
       <div className='w-[60%] mx-auto mt-20 grid grid-cols-2 gap-20 '>
         {isAlbum?.map((item) =>
-          <Link
-            key={item.id}
-            to={`/album/${item.id}`}
-            className='h-[250px] w-[250px] mx-auto'>
-            <img
-              className='h-[100%]'
-              src={item["picture_album"]} alt={item.id} />
-          </Link>
+          <div className='relative' key={item.id}>
+            <Link
+              to={`/album/${item.id}`}
+              className='h-[250px] w-[250px] mx-auto'>
+              <img
+                className='h-full aspect-square w-full'
+                src={item["picture_album"]} alt={item.id} />
+            </Link>
+            {isUser?.['isAdmin'] ?
+            <div
+              role='button' onClick={() => handleDeleteAlbum(item.id)}
+              className='absolute z-10 top-0 right-0 text-xl w-8 h-8 bg-white m-2 rounded-full'>
+              <div className='flex justify-center items-center text-red-600'>
+                &#10005;
+              </div>
+            </div>
+            : null}
+          </div>
         )}
 
         {isUser?.['isAdmin'] ?
@@ -52,7 +57,7 @@ export default function PageAlbum() {
           width={60}
           open={open} onClose={() => setOpen(false)}
         >
-          <ModalCreateAlbum onSuccess={() => Rerender()} />
+          <ModalCreateAlbum onSuccess={() => setOpen(false)} />
         </Modal>
 
       </div>

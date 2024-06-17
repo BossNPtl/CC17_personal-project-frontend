@@ -40,8 +40,18 @@ export default function AlbumContextProvider({ children }) {
         }
     }
 
+    const deleteAlbum = async (albumId) => {
+        try {
+            await albumApi.deleteAlbum(albumId);
+            const filter = isAlbum.filter(item => item.id !== albumId)
+            setIsAlbum([...filter])
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    
     return (
-        <AlbumContext.Provider value={{ isAlbum, setIsAlbum, createAlbum, isSong, createSong, fetchAllSong }}>
+        <AlbumContext.Provider value={{ isAlbum, setIsAlbum, createAlbum, isSong, createSong, fetchAllSong, deleteAlbum }}>
             {children}
         </AlbumContext.Provider>
     );

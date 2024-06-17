@@ -9,6 +9,7 @@ import albumApi from '../apis/album-api';
 import PostForm from '../features/PostForm';
 import HasComment from '../hooks/hasComment';
 import validateCreateComment from '../validators/createComment-validate';
+import UserSignIn from '../hooks/userSignIn';
 
 const initialInputPost = {
     message: ''
@@ -16,6 +17,7 @@ const initialInputPost = {
 
 export default function Album() {
     const [album, setAlbum] = useState();
+    const { isUser } = UserSignIn();
     const { albumId } = useParams();
     const { isComment, fetchComment, createComment, editComment, deleteComment } = HasComment();
     const [inputPost, setInputPost] = useState(initialInputPost);
@@ -123,7 +125,9 @@ export default function Album() {
                     <p className='mb-6'>รายการ</p>
                 </div>
                 <div className='flex flex-col gap-6'>
-                    <PostForm onChange={handleChangeInput} inputPost={inputPost} onSubmit={handlePostComment} />
+                    {isUser ?
+                        <PostForm onChange={handleChangeInput} inputPost={inputPost} onSubmit={handlePostComment} />
+                    : null}
                     {isComment?.map((item) =>
                         <BoxComment
                             key={item.id} item={item}

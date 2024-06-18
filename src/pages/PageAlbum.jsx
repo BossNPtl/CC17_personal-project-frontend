@@ -33,22 +33,25 @@ export default function PageAlbum() {
                 src={item["picture_album"]} alt={item.id} />
             </Link>
             {isUser?.['isAdmin'] ?
-            <div
-              role='button' onClick={() => handleDeleteAlbum(item.id)}
-              className='absolute z-10 top-0 right-0 text-xl w-8 h-8 bg-white m-2 rounded-full'>
-              <div className='flex justify-center items-center text-red-600'>
-                &#10005;
+              <div
+                role='button' onClick={() => handleDeleteAlbum(item.id)}
+                className='absolute z-10 top-0 right-0 text-xl w-8 h-8 bg-white m-2 rounded-full'>
+                <div className='flex justify-center w-full h-full items-center text-red-600 inset-0'>
+                  &#10005;
+                </div>
               </div>
-            </div>
-            : null}
+              : null}
           </div>
         )}
 
         {isUser?.['isAdmin'] ?
           < div
             role='button' onClick={() => setOpen(true)}
-            className='h-[250px] w-[250px] mx-auto bg-gray-200 flex justify-center items-center'>
+            className='h-[250px] w-[250px] mx-auto my-auto bg-gray-200 flex justify-center items-center'>
             <div className='h-[100px] w-[100px] mx-auto bg-gray-300 border border-black'>
+              <div className='flex justify-center items-center rotate-45 h-full text-4xl font-extrabold'>
+                &#10005;
+              </div>
             </div>
           </div>
           : null}

@@ -114,7 +114,7 @@ export default function ListSong() {
                             </>
                         }
                     </div>
-                    <div className="flex flex-1 justify-start gap-6">
+                    {/* <div className="flex flex-1 justify-start gap-6">
                         {!edit
                             ?
                             <Button weight="150" onClick={() => setEdit(true)} >
@@ -130,7 +130,7 @@ export default function ListSong() {
                                 </Button>
                             </>
                         }
-                    </div>
+                    </div> */}
                 </div>
                 : null}
             </form>

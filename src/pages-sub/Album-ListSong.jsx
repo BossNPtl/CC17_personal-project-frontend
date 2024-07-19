@@ -4,10 +4,11 @@ import { useParams } from "react-router-dom";
 
 import Button from "../components/Button";
 import HasAlbum from "../hooks/hasAlbum";
-import NewSongColumn from "./newSongColumn";
+// import NewSongColumn from "./newSongColumn";
 import albumApi from "../apis/album-api";
 import validateCreateSong from "../validators/createSong-validate";
 import UserSignIn from "../hooks/userSignIn";
+import Input from "../components/Input";
 
 const initialNewSong = {
     no: '',
@@ -35,6 +36,16 @@ export default function ListSong() {
     const handleAddButton = (event) => {
         event.preventDefault()
         setAdd(prev => !prev)
+        if (!add) {
+            setInput(initialNewSong);
+        }
+    }
+    const handleEditButton = (event) => {
+        event.preventDefault()
+        setEdit(prev => !prev)
+        // if (!edit) {
+        //     setInputEditSong(initialInputEditSong);
+        // }
     }
 
     useEffect(() => {
@@ -65,7 +76,7 @@ export default function ListSong() {
 
     return (
         <div className='w-[100%]'>
-            <table className="w-[100%] table-auto">
+            {/* <table className="w-[100%] table-auto">
                 <thead>
                     <tr className="bg-black text-white">
                         <th className="w-[5%]">No.</th>
@@ -90,49 +101,116 @@ export default function ListSong() {
                         </tr>
                     )}
                 </tbody>
-            </table>
+            </table> */}
+            <div className="bg-black text-white grid grid-cols-10 p-2">
+                <div className="col-span-1 flex justify-start">No.</div>
+                <div className="col-span-5 flex justify-start">Title</div>
+                <div className="col-span-3 flex justify-start">Writer</div>
+                <div className="col-span-1 flex justify-center">Length</div>
+            </div>
+            {isSong?.map((item, index) =>
+                <>
+                    <div key={item.id}
+                        className={`grid grid-cols-10 p-2 relative
+                    ${index % 2 === 0 ? 'bg-[#D0D0D0] text-black' : 'bg-[#9B9B9B] text-white'}`}>
+                        <div className="col-span-1 flex justify-start">{item.no}.</div>
+                        <div className="col-span-5 flex justify-start">{item.title}</div>
+                        <div className="col-span-3 flex justify-start">{item.writer}</div>
+                        <div className="col-span-1 flex justify-center ">{item.length}</div>
+                        <div className="absolute -right-14">
+                            {edit ? <Button>Edit</Button> : ''}
+                        </div>
+                    </div>
+                </>
+            )}
             <form onSubmit={handleSubmitSong} >
                 {add &&
-                    <NewSongColumn onChange={handleChangeInput} input={input} />
+                    // <NewSongColumn onChange={handleChangeInput} input={input} />
+                    <div className="w-[100%] grid grid-cols-10">
+                        <div className="col-span-1 flex justify-start">
+                            <Input
+                                placeholder={'No'}
+                                name='no'
+                                value={input.no}
+                                onChange={handleChangeInput}
+                                rounded="none"
+                                focus="focus:ring-none"
+                                bgColor="gray"
+                            />
+                        </div>
+                        <div className="col-span-5 flex justify-start">
+                            <Input
+                                placeholder={'Title'}
+                                name='title'
+                                value={input.title}
+                                onChange={handleChangeInput}
+                                rounded="none"
+                                focus="focus:ring-none"
+                                bgColor="gray"
+                            />
+                        </div>
+                        <div className="col-span-3 flex justify-start">
+                            <Input
+                                placeholder={'Writer'}
+                                name='writer'
+                                value={input.writer}
+                                onChange={handleChangeInput}
+                                rounded="none"
+                                focus="focus:ring-none"
+                                bgColor="gray"
+                            />
+                        </div>
+                        <div className="col-span-1 flex justify-start">
+                            <Input
+                                placeholder={'Length'}
+                                name='length'
+                                value={input.length}
+                                onChange={handleChangeInput}
+                                rounded="none"
+                                focus="focus:ring-none"
+                                bgColor="gray"
+                            />
+                        </div>
+                    </div>
                 }
                 {isUser?.['isAdmin'] ?
                     <div className="pt-3 flex justify-center gap-6">
-                    <div className="flex flex-1 justify-end gap-6">
-                        {!add
-                            ?
-                            <Button type="button" weight="150" onClick={handleAddButton}>
-                                Add
-                            </Button>
-                            :
-                            <>
-                                <Button weight="150" onClick={handleSubmitSong}>
-                                    Save
+                        <div className="flex flex-1 justify-end gap-6">
+                            {!add
+                                ?
+                                <Button type="button" weight="150" onClick={handleAddButton}>
+                                    Add
                                 </Button>
-                                <Button types="button" weight="150" onClick={() => setAdd(false)}>
-                                    Cancel
+                                :
+                                <>
+                                    <Button weight="150" onClick={handleSubmitSong}>
+                                        Save
+                                    </Button>
+                                    <Button types="button" weight="150" onClick={handleAddButton}>
+                                        Cancel
+                                    </Button>
+                                </>
+                            }
+                        </div>
+                        <div className="flex flex-1 justify-start gap-6">
+                            {!edit
+                                ?
+                                <Button weight="150" onClick={handleEditButton} >
+                                    Edit
                                 </Button>
-                            </>
-                        }
+                                :
+                                <>
+                                    <Button weight="150" onClick={handleEditButton}>
+                                        Cancel
+                                    </Button>
+                                    <Button weight="150">
+                                        Save
+                                    </Button>
+                                </>
+                            }
+                        </div>
                     </div>
-                    {/* <div className="flex flex-1 justify-start gap-6">
-                        {!edit
-                            ?
-                            <Button weight="150" onClick={() => setEdit(true)} >
-                                Edit
-                            </Button>
-                            :
-                            <>
-                                <Button weight="150" onClick={() => setEdit(false)}>
-                                    Cancel
-                                </Button>
-                                <Button weight="150">
-                                    Save
-                                </Button>
-                            </>
-                        }
-                    </div> */}
-                </div>
-                : null}
+                    : null}
             </form>
         </div >
     )

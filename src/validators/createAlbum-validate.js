@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const createAlbumSchema = Joi.object({
     name: Joi.string().required(),
-    picture_album: Joi.string().required(),
+    // picture_album: Joi.string().required(),
     description: Joi.string().required(),
     // release: Joi.string().required
 }).unknown(true);

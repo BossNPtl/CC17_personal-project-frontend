@@ -2,6 +2,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
-export default function UserSignIn() {
+export default function userSignIn() {
     return useContext(AuthContext);
 }

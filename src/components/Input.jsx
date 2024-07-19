@@ -17,7 +17,7 @@ const PlaceholderColor = {
 }
 
 export default function Input({
-     type = 'text', placeholder, value, name, weight = 'w-full', rounded = 'rounded-lg', onChange, 
+     type = 'text', placeholder, value, name, weight = 'w-full', rounded = 'rounded-lg', onChange, onClick,
      error, bgColor = 'gray', textColor = 'gray', placeholderColor = 'gray200', focus = 'focus:ring-2'
     }) {
     return (
@@ -28,6 +28,7 @@ export default function Input({
                 value={value}
                 name={name}
                 onChange={onChange}
+                onClick={onClick}
                 className={`
             ${weight} px-3 py-1.5 border ${rounded} ${BgColor[bgColor]} ${TextColor[textColor]} ${PlaceholderColor[placeholderColor]} focus:outline-none ${focus}
             ${error

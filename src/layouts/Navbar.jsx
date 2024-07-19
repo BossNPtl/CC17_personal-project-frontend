@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import MenuBar from './MenuBar';
 import LinkOutside from './LinkOutside';
 import AuthFunction from './AuthFunction';
-import UserSignIn from '../hooks/userSignIn';
+import userSignIn from '../hooks/userSignIn';
 import Avatar from '../components/Avatar';
 import { useState } from 'react';
 import ProfileDropdown from './ProfileDropdown';
 
 export default function Navbar() {
-    const { isUser, logout } = UserSignIn();
+    const { isUser, logout } = userSignIn();
     const [open, setOpen] = useState(false);
 
     const navigate = useNavigate();

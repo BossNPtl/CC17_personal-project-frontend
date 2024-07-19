@@ -5,8 +5,8 @@ import Input from "../components/Input";
 export default function NewSongColumn({ onChange, input }) {
 
     return (
-        <div className="w-[100%] flex">
-            <div className="w-[10%]">
+        <div className="w-[100%] grid grid-cols-10">
+            <div className="col-span-1 flex justify-start">
                 <Input
                     placeholder={'No'}
                     name='no'
@@ -14,9 +14,10 @@ export default function NewSongColumn({ onChange, input }) {
                     onChange={onChange}
                     rounded="none"
                     focus="focus:ring-none"
+                    bgColor="gray"
                 />
             </div>
-            <div className="w-[45%]">
+            <div className="col-span-5 flex justify-start">
                 <Input
                     placeholder={'Title'}
                     name='title'
@@ -24,9 +25,10 @@ export default function NewSongColumn({ onChange, input }) {
                     onChange={onChange}
                     rounded="none"
                     focus="focus:ring-none"
+                    bgColor="gray"
                 />
             </div>
-            <div className="w-[35%]">
+            <div className="col-span-3 flex justify-start">
                 <Input
                     placeholder={'Writer'}
                     name='writer'
@@ -34,9 +36,10 @@ export default function NewSongColumn({ onChange, input }) {
                     onChange={onChange}
                     rounded="none"
                     focus="focus:ring-none"
+                    bgColor="gray"
                 />
             </div>
-            <div className="w-[10%]">
+            <div className="col-span-1 flex justify-start">
                 <Input
                     placeholder={'Length'}
                     name='length'
@@ -44,6 +47,7 @@ export default function NewSongColumn({ onChange, input }) {
                     onChange={onChange}
                     rounded="none"
                     focus="focus:ring-none"
+                    bgColor="gray"
                 />
             </div>
         </div>

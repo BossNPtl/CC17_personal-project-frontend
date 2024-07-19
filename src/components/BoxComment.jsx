@@ -3,12 +3,12 @@ import { FontSize, FontWeight } from '../constants/editSource'
 
 
 import Button from '../components/Button'
-import UserSignIn from '../hooks/userSignIn'
+import userSignIn from '../hooks/userSignIn'
 import Avatar from './Avatar'
 import { useState } from 'react'
 
 export default function BoxComment({ item, onDelete, onSave }) {
-    const { isUser } = UserSignIn()
+    const { isUser } = userSignIn()
 
     const [edit, setEdit] = useState(false);
     const [inputChangeMes, setInputChangeMes] = useState(item?.message)

@@ -7,7 +7,7 @@ import HasAlbum from "../hooks/hasAlbum";
 // import NewSongColumn from "./newSongColumn";
 import albumApi from "../apis/album-api";
 import validateCreateSong from "../validators/createSong-validate";
-import UserSignIn from "../hooks/userSignIn";
+import userSignIn from "../hooks/userSignIn";
 import Input from "../components/Input";
 
 const initialNewSong = {
@@ -18,7 +18,7 @@ const initialNewSong = {
 };
 
 export default function ListSong() {
-    const { isUser } = UserSignIn();
+    const { isUser } = userSignIn();
     const { fetchAllSong, isSong } = HasAlbum();
     const { albumId } = useParams();
     // console.log(albumId);

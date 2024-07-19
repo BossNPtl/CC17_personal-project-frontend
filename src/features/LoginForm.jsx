@@ -6,7 +6,7 @@ import { AxiosError } from "axios";
 import validateLogin from '../validators/login-validate';
 import Input from "../components/Input"
 import Button from "../components/Button"
-import UserSignIn from "../hooks/userSignIn";
+import userSignIn from "../hooks/userSignIn";
 
 const initialInput = {
     email: '',
@@ -24,7 +24,7 @@ export default function LoginForm() {
 
     const navigate = useNavigate();
 
-    const { login } = UserSignIn();
+    const { login } = userSignIn();
 
     const handleChangeInput = (event) => {
         setInput({ ...input, [event.target.name]: event.target.value })

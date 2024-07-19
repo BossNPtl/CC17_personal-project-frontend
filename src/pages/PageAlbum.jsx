@@ -4,11 +4,11 @@ import { useState } from 'react'
 import ModalCreateAlbum from '../layouts/Modal-CreateAlbum'
 import Modal from '../components/modal';
 import HasAlbum from '../hooks/hasAlbum';
-import UserSignIn from '../hooks/userSignIn';
+import userSignIn from '../hooks/userSignIn';
 
 export default function PageAlbum() {
   const { isAlbum, deleteAlbum } = HasAlbum();
-  const { isUser } = UserSignIn();
+  const { isUser } = userSignIn();
 
   const [open, setOpen] = useState(false);
 

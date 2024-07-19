@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import Input from '../components/Input';
 import validateRename from '../validators/user-validate';
 import userApi from '../apis/user-api';
-import UserSignIn from '../hooks/userSignIn';
+import userSignIn from '../hooks/userSignIn';
 
 const initialInputError = {
     name: ''
@@ -14,7 +14,7 @@ const initialInputError = {
 
 export default function ProfileDropdown({ logout, setOpen }) {
 
-    const { fetchUser, isUser } = UserSignIn();
+    const { fetchUser, isUser } = userSignIn();
     const [input, setInput] = useState({name:isUser.name})
     const [edit, setEdit] = useState(false);
     const [inputError, setInputError] = useState(initialInputError);

@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
-import ProtectedRouteAdmin from '../components/routes/protuctRouteAdmin';
+import ProtectedRouteAdmin from '../components/routes/protectRouteAdmin';
 
 const Navbar = lazy(() => import ('../layouts/Navbar'));
 const PageHome = lazy(() => import ('../pages/PageHome'));

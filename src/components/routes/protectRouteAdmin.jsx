@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Navigate } from "react-router-dom";
-import UserSignIn from "../../hooks/userSignIn";
+import userSignIn from "../../hooks/userSignIn";
 
 export default function ProtectedRouteAdmin({ children }) {
-    const { isUser } = UserSignIn();
+    const { isUser } = userSignIn();
 
     if (!isUser) {
         return <Navigate to='/auth/login' />

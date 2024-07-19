@@ -4,13 +4,14 @@ import { useState } from "react";
 import Button from "../components/Button";
 import Input from "../components/Input";
 // import { AxiosError } from "axios";
-import validateCreateAlbum from "../validators/createAlbum-validate";
-import HasAlbum from "../hooks/hasAlbum";
+// import validateCreateAlbum from "../validators/createAlbum-validate";
+// import HasAlbum from "../hooks/hasAlbum";
+import albumApi from "../apis/album-api";
 
 const initialInput = {
     name: '',
-    picture_album: '',
-    picture_band: '',
+    // picture_album: '',
+    // picture_band: '',
     description: '',
     release: ''
 };
@@ -27,24 +28,50 @@ export default function ModalCreateAlbum({ onSuccess }) {
     const dateTime = new Date(date)
     console.log(dateTime);
     */
-    const { createAlbum } = HasAlbum()
+    // const { createAlbum } = HasAlbum()
 
     const [input, setInput] = useState(initialInput);
     const [inputError, setInputError] = useState(initialInputError);
+    const [inputImage, setInputImage] = useState({});
 
     const handleChangeInput = (event) => {
         setInput({ ...input, [event.target.name]: event.target.value })
     };
 
+    const handelImageAlbum = (event) => {
+        const file = event.target.files[0];
+        console.log(file)
+        setInputImage({ ...inputImage, picture_album: file });
+        console.log(inputImage);
+    };
+
+    const handelImageBand = (event) => {
+        const file = event.target.files[0];
+        console.log(file)
+        setInputImage({ ...inputImage, picture_band: file });
+        console.log(inputImage);
+    };
+
     const handleSubmitForm = async (event) => {
         try {
             event.preventDefault();
-            const failed = validateCreateAlbum(input);
-            if (failed) {
-                return setInputError(failed);
-            }
-            setInputError({ ...initialInputError });
-            await createAlbum(input);
+            // const failed = validateCreateAlbum(input);
+            // if (failed) {
+            //     return setInputError(failed);
+            // }
+            // setInputError({ ...initialInputError });
+
+            const formData = new FormData();
+            formData.append("picture_album", inputImage.picture_album);
+            formData.append("picture_band", inputImage.picture_band);
+            formData.append("name", input.name);
+            formData.append("description", input.description);
+            formData.append("release", input.release);
+            console.log('formData --->>', Object.fromEntries(formData));
+
+            await albumApi.createAlbum(formData);
+            // await createAlbum(formData);
+            console.log("Success");
             onSuccess();
 
         } catch (err) {
@@ -67,18 +94,18 @@ export default function ModalCreateAlbum({ onSuccess }) {
                         />
                         <p className="pt-4">Album picture :</p>
                         <Input
-                            // type="file"
+                            type="file"
                             name='picture_album'
-                            onChange={handleChangeInput}
-                            value={input.picture_album}
-                            error={inputError.picture_album}
+                            onChange={handelImageAlbum}
+                        // value={inputImage.picture_album}
+                        // error={inputError.picture_album}
                         />
                         <p className="pt-4">Band picture :</p>
                         <Input
-                            // type="file"
+                            type="file"
                             name="picture_band"
-                            onChange={handleChangeInput}
-                            value={input.picture_band}
+                            onChange={handelImageBand}
+                        // value={inputImage.picture_band}
                         // error={inputError.picture_band}
                         />
                     </div>

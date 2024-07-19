@@ -17,14 +17,22 @@ const initialNewSong = {
     length: ''
 };
 
+const initialInputEditSong = {
+    no: '',
+    title: '',
+    writer: '',
+    length: ''
+};
+
 export default function ListSong() {
     const { isUser } = userSignIn();
     const { fetchAllSong, isSong } = HasAlbum();
     const { albumId } = useParams();
     // console.log(albumId);
 
-    const [input, setInput] = useState(initialNewSong)
+    const [input, setInput] = useState(initialNewSong);
     const [reset, setReset] = useState(false);
+    const [inputEditSong, setInputEditSong] = useState(initialInputEditSong);
 
     const Rerender = () => {
         setReset(!reset);
@@ -32,6 +40,9 @@ export default function ListSong() {
 
     const [edit, setEdit] = useState(false);
     const [add, setAdd] = useState(false);
+    const [editSong, setEditSong] = useState(false);
+    console.log('edit -->>', edit);
+    console.log('editSong -->>', editSong);
 
     const handleAddButton = (event) => {
         event.preventDefault()
@@ -39,14 +50,25 @@ export default function ListSong() {
         if (!add) {
             setInput(initialNewSong);
         }
-    }
-    const handleEditButton = (event) => {
+    };
+
+    const handleOpenEditButton = (event) => {
         event.preventDefault()
-        setEdit(prev => !prev)
-        // if (!edit) {
-        //     setInputEditSong(initialInputEditSong);
-        // }
-    }
+        setEdit(true)
+    };
+
+    const handleCloseEditButton = (event) => {
+        event.preventDefault()
+        setEdit(false)
+        setEditSong(false);
+        setInputEditSong(initialInputEditSong);
+    };
+
+    const handleEditSongButton = (event) => {
+        event.preventDefault()
+        setEditSong(prev => !prev)
+
+    };
 
     useEffect(() => {
         fetchAllSong(albumId)
@@ -109,19 +131,28 @@ export default function ListSong() {
                 <div className="col-span-1 flex justify-center">Length</div>
             </div>
             {isSong?.map((item, index) =>
-                <>
-                    <div key={item.id}
+                <div key={item.id}>
+                    <div
                         className={`grid grid-cols-10 p-2 relative
                     ${index % 2 === 0 ? 'bg-[#D0D0D0] text-black' : 'bg-[#9B9B9B] text-white'}`}>
                         <div className="col-span-1 flex justify-start">{item.no}.</div>
                         <div className="col-span-5 flex justify-start">{item.title}</div>
                         <div className="col-span-3 flex justify-start">{item.writer}</div>
                         <div className="col-span-1 flex justify-center ">{item.length}</div>
-                        <div className="absolute -right-14">
-                            {edit ? <Button>Edit</Button> : ''}
+                        <div className={`flex gap-2 absolute ${edit && editSong ? '-right-36' : '-right-14' }`}>
+                            {
+                                edit && !editSong
+                                    ? <Button onClick={handleEditSongButton}>Edit</Button> :
+                                    edit && editSong ?
+                                        <>
+                                            <Button>Save</Button>
+                                            <Button>Delete</Button>
+                                        </>
+                                        : ''
+                            }
                         </div>
                     </div>
-                </>
+                </div>
             )}
             <form onSubmit={handleSubmitSong} >
                 {add &&
@@ -195,12 +226,12 @@ export default function ListSong() {
                         <div className="flex flex-1 justify-start gap-6">
                             {!edit
                                 ?
-                                <Button weight="150" onClick={handleEditButton} >
+                                <Button weight="150" onClick={handleOpenEditButton} >
                                     Edit
                                 </Button>
                                 :
                                 <>
-                                    <Button weight="150" onClick={handleEditButton}>
+                                    <Button weight="150" onClick={handleCloseEditButton}>
                                         Cancel
                                     </Button>
                                     <Button weight="150">
